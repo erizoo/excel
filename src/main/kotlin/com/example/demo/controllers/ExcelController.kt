@@ -16,7 +16,7 @@ class ExcelController(private val excelService: ExcelService) {
 
     @GetMapping("/excel")
     fun greeting(@RequestParam(value = "name", defaultValue = "World") name: String) =
-            Product(counter.incrementAndGet(), "Hello, $name")
+            Product(counter.incrementAndGet().toString(), 0)
 
     @GetMapping("/excel/parse")
     fun parseExcel(@RequestParam(value = "name", defaultValue = "World") name: String) =

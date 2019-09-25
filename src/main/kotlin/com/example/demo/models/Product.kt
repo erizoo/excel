@@ -9,13 +9,17 @@ import javax.validation.constraints.NotBlank
 
 @Entity
 data class Product(
-        @Id @GeneratedValue(strategy = GenerationType.AUTO)
-        val id: Long = 0,
 
         @get: NotBlank
         val name: String = "",
 
         @get: NotBlank
-        val price: Int = 0
+        val price: Int = 0,
 
-) : Serializable
+        @Id @GeneratedValue(strategy = GenerationType.AUTO)
+        val id: Long = 0
+
+) : Serializable{
+        private constructor() : this("", 0)
+}
+
