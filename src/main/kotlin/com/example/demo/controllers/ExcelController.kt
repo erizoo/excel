@@ -1,17 +1,24 @@
 package com.example.demo.controllers
 
 import com.example.demo.models.Product
+import com.example.demo.service.ExcelService
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.util.concurrent.atomic.AtomicLong
 
 @RestController
-class ExcelController {
+@RequestMapping("/api")
+class ExcelController(private val excelService: ExcelService) {
 
     val counter = AtomicLong()
 
     @GetMapping("/excel")
     fun greeting(@RequestParam(value = "name", defaultValue = "World") name: String) =
             Product(counter.incrementAndGet(), "Hello, $name")
+
+    @GetMapping("/excel/parse")
+    fun parseExcel(@RequestParam(value = "name", defaultValue = "World") name: String) =
+            excelService.parseExcel()
 }
