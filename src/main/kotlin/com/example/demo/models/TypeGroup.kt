@@ -8,13 +8,12 @@ import javax.persistence.Id
 import javax.validation.constraints.NotBlank
 
 @Entity
-data class Warehouse(
+data class TypeGroup(
 
         @get: NotBlank
         val name: String = "",
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long = 0
 
 ) : Serializable

@@ -7,21 +7,17 @@ import javax.validation.constraints.NotBlank
 
 @Entity
 data class ProductStorage(
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        val id: Long = 0,
+
+        val amount: Int = 0,
 
         @ManyToOne(optional = false, fetch = FetchType.LAZY)
-        @MapsId("productId")
-        @get: NotBlank
         val productId: Product,
 
         @ManyToOne(optional = false, fetch = FetchType.LAZY)
-        @MapsId("warehouseId")
-        @get: NotBlank
         val warehouseId: Warehouse,
 
-        @get: NotBlank
-        val amount: Int = 0
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        val id: Long = 0
 
 ) : Serializable
