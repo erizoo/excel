@@ -16,11 +16,15 @@ class ExcelController(private val excelService: ExcelService) {
     val counter = AtomicLong()
 
     @GetMapping("/excel")
-    fun greeting(@RequestParam(value = "name", defaultValue = "World") name: String): Product {
+    fun greeting(): Product {
         return  Product( "",0.0 , TypeGroup("dsgsdg", 1) )
     }
 
     @GetMapping("/excel/parse")
-    fun parseExcel(@RequestParam(value = "name", defaultValue = "World") name: String) =
+    fun parseExcel() =
             excelService.parseExcel()
+
+    @GetMapping("/excel/search")
+    fun searchForName(@RequestParam(value = "name", defaultValue = "World") name: String) =
+            excelService.searchForName(name)
 }

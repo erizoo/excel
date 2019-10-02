@@ -1,9 +1,6 @@
 package com.example.demo.service
 
-import com.example.demo.models.Product
-import com.example.demo.models.ProductStorage
-import com.example.demo.models.TypeGroup
-import com.example.demo.models.Warehouse
+import com.example.demo.models.*
 import com.example.demo.repository.ExcelRepository
 import com.example.demo.repository.ProductStorageRepository
 import com.example.demo.repository.TypeGroupRepository
@@ -66,15 +63,15 @@ class ExcelService(
                     val product = Product(row.getCell(0).stringCellValue, row.getCell(13).numericCellValue, TypeGroup(typeName, typeCount.toLong()))
                     productList.add(product)
                     productStorageList.add(ProductStorage(row.getCell(3).numericCellValue.toInt(), product, warehouseList[0]))
-                    productStorageList.add(ProductStorage(row.getCell(4).numericCellValue.toInt(), product, warehouseList[0]))
-                    productStorageList.add(ProductStorage(row.getCell(5).numericCellValue.toInt(), product, warehouseList[0]))
-                    productStorageList.add(ProductStorage(row.getCell(6).numericCellValue.toInt(), product, warehouseList[0]))
-                    productStorageList.add(ProductStorage(row.getCell(7).numericCellValue.toInt(), product, warehouseList[0]))
-                    productStorageList.add(ProductStorage(row.getCell(8).numericCellValue.toInt(), product, warehouseList[0]))
-                    productStorageList.add(ProductStorage(row.getCell(9).numericCellValue.toInt(), product, warehouseList[0]))
-                    productStorageList.add(ProductStorage(row.getCell(10).numericCellValue.toInt(), product, warehouseList[0]))
-                    productStorageList.add(ProductStorage(row.getCell(11).numericCellValue.toInt(), product, warehouseList[0]))
-                    productStorageList.add(ProductStorage(row.getCell(12).numericCellValue.toInt(), product, warehouseList[0]))
+                    productStorageList.add(ProductStorage(row.getCell(4).numericCellValue.toInt(), product, warehouseList[1]))
+                    productStorageList.add(ProductStorage(row.getCell(5).numericCellValue.toInt(), product, warehouseList[2]))
+                    productStorageList.add(ProductStorage(row.getCell(6).numericCellValue.toInt(), product, warehouseList[3]))
+                    productStorageList.add(ProductStorage(row.getCell(7).numericCellValue.toInt(), product, warehouseList[4]))
+                    productStorageList.add(ProductStorage(row.getCell(8).numericCellValue.toInt(), product, warehouseList[5]))
+                    productStorageList.add(ProductStorage(row.getCell(9).numericCellValue.toInt(), product, warehouseList[6]))
+                    productStorageList.add(ProductStorage(row.getCell(10).numericCellValue.toInt(), product, warehouseList[7]))
+                    productStorageList.add(ProductStorage(row.getCell(11).numericCellValue.toInt(), product, warehouseList[8]))
+                    productStorageList.add(ProductStorage(row.getCell(12).numericCellValue.toInt(), product, warehouseList[9]))
                 }
             } catch (e: IllegalStateException) {
                 typeCount = 0
@@ -114,5 +111,9 @@ class ExcelService(
         productStorageRepository.saveAll(productStorageList)
     }
 
+    @Transactional
+    fun searchForName(name: String): List<ExcelRepository.ResultDto> {
+        return excelRepository.searchForName(name)
+    }
 
 }
